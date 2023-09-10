@@ -1,30 +1,44 @@
 const toolbarOptions = [
     ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
     ['blockquote', 'code-block'],
-  
+
     [{ 'header': 1 }, { 'header': 2 }],               // custom button values
-    [{ 'list': 'ordered'}, { 'list': 'bullet' }],
-    [{ 'script': 'sub'}, { 'script': 'super' }],      // superscript/subscript
-    [{ 'indent': '-1'}, { 'indent': '+1' }],          // outdent/indent
+    [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+    [{ 'script': 'sub' }, { 'script': 'super' }],      // superscript/subscript
+    [{ 'indent': '-1' }, { 'indent': '+1' }],          // outdent/indent
     [{ 'direction': 'rtl' }],                         // text direction
-  
+
     [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
     [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
-  
+
     [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
     [{ 'font': [] }],
     [{ 'align': [] }],
-  
+
     ['clean']                                         // remove formatting button
-  ];
+];
 
 var quill = new Quill('#editor', {
     theme: 'snow',
-    modules:{
+    modules: {
         toolbar: toolbarOptions
     }
 });
 
-const socket = io('http://localhost:2200');
+const socketServer = io('http://localhost:2200');
+
+quill.on('text-change', function (delta, oldDelta, source) {
+    if (source == 'api') {
+        console.log("An API call triggered this change.");
+    } else if (source == 'user') {
+        console.log("A user action triggered this change.");
+        socketServer.emit('send-changes',delta);
+    }
+});
+
+socketServer.on('recieve-changes',delta=>{
+    quill.updateContents(delta);
+});
+
 
 //socket.disconnect();
