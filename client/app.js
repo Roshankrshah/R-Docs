@@ -24,3 +24,7 @@ var quill = new Quill('#editor', {
         toolbar: toolbarOptions
     }
 });
+
+const socket = io('http://localhost:9000');
+
+//socket.disconnect();
