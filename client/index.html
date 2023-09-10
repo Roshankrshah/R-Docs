@@ -1,25 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>R-Doc</title>
-    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <title>R-Docs</title>
 </head>
-
 <body>
-    <div class="container">
-        <div id="editor" class="page-container">
-            <p>Hello World!</p>
-            <p>Some initial <strong>bold</strong> text</p>
-            <p><br></p>
-        </div>
+    <div>
+        <button id="create">Create Doc</button>   
     </div>
-    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
-    <script defer src="http://localhost:2200/socket.io/socket.io.js"></script>
-    <script defer src="app.js"></script>
+    <div>
+        <input type="text" class="docId" id="docId" placeholder="Enter doc id">
+        <button id="join">Join Doc</button>
+    </div>
+    <script src="script.js"></script>
 </body>
-
 </html>

@@ -25,6 +25,10 @@ var quill = new Quill('#editor', {
     }
 });
 
+
+const docId = (window.location.href.split('?')[1]).split('=')[1];
+console.log(docId);
+
 const socketServer = io('http://localhost:2200');
 
 quill.on('text-change', function (delta, oldDelta, source) {
@@ -41,4 +45,4 @@ socketServer.on('recieve-changes',delta=>{
 });
 
 
-//socket.disconnect();
+socketServer.disconnect();
