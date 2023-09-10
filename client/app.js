@@ -34,6 +34,7 @@ socketServer.emit('get-document', docId);
 
 socketServer.on('load-document', document => {
     console.log('hi');
+    console.log(document);
     quill.setContents(document);
     quill.enable();
 });

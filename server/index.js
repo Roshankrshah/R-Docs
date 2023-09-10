@@ -4,14 +4,7 @@ const { Server } = require('socket.io');
 const connectDB = require('./config/db');
 const {getDocument,updateDocument} = require('./controller/documentController');
 
-try{
-    connectDB(process.env.MONGO_URI);
-    console.log('DB connected')
-}catch(err){
-    console.log(err);
-    return;
-}
-
+connectDB(process.env.MONGO_URI);
 
 const PORT = process.env.PORT || 2200;
 
@@ -26,8 +19,9 @@ io.on('connection', socket => {
     console.log('connected');
     socket.on('get-document', async (documentId) => {
         const document = await getDocument(documentId);
+        console.log('c',document.data);
         socket.join(documentId);
-        socket.to(documentId).emit('load-document',document.data);
+        socket.emit('load-document',document.data);
 
         socket.on('send-changes', delta => {
             console.log(delta);
