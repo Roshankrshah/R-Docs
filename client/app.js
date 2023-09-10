@@ -25,6 +25,6 @@ var quill = new Quill('#editor', {
     }
 });
 
-const socket = io('http://localhost:9000');
+const socket = io('http://localhost:2200');
 
 //socket.disconnect();
