@@ -18,6 +18,8 @@ const toolbarOptions = [
     ['clean']                                         // remove formatting button
 ];
 
+const socketServer = io('http://localhost:2200');
+
 var quill = new Quill('#editor', {
     theme: 'snow',
     modules: {
@@ -25,24 +27,31 @@ var quill = new Quill('#editor', {
     }
 });
 
-
 const docId = (window.location.href.split('?')[1]).split('=')[1];
 console.log(docId);
 
-const socketServer = io('http://localhost:2200');
+socketServer.emit('get-document', docId);
+
+socketServer.on('load-document', document => {
+    console.log('hi');
+    quill.setContents(document);
+    quill.enable();
+});
+
 
 quill.on('text-change', function (delta, oldDelta, source) {
     if (source == 'api') {
         console.log("An API call triggered this change.");
     } else if (source == 'user') {
         console.log("A user action triggered this change.");
-        socketServer.emit('send-changes',delta);
+        socketServer.emit('send-changes', delta);
     }
 });
 
-socketServer.on('recieve-changes',delta=>{
+
+socketServer.on('recieve-changes', delta => {
     quill.updateContents(delta);
 });
 
 
-socketServer.disconnect();
+//socketServer.disconnect();
