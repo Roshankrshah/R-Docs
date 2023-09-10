@@ -1,4 +1,16 @@
+require('dotenv').config();
 const { Server } = require('socket.io');
+
+const connectDB = require('./config/db');
+
+try{
+    connectDB(process.env.MONGO_URI);
+    console.log('DB connected')
+}catch(err){
+    console.log(err);
+    return;
+}
+
 
 const PORT = process.env.PORT || 2200;
 
