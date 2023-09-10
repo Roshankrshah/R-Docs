@@ -53,5 +53,9 @@ socketServer.on('recieve-changes', delta => {
     quill.updateContents(delta);
 });
 
+setInterval(() => {
+    socketServer.emit('save-document',quill.getContents())
+}, 2000);
+
 
 //socketServer.disconnect();
