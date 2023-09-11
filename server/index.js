@@ -19,7 +19,7 @@ io.on('connection', socket => {
     console.log('connected');
     socket.on('get-document', async (documentId) => {
         const document = await getDocument(documentId);
-        console.log('c',document.data);
+
         socket.join(documentId);
         socket.emit('load-document',document.data);
 

@@ -18,8 +18,6 @@ const toolbarOptions = [
     ['clean']                                         // remove formatting button
 ];
 
-const socketServer = io('http://localhost:2200');
-
 var quill = new Quill('#editor', {
     theme: 'snow',
     modules: {
@@ -29,6 +27,8 @@ var quill = new Quill('#editor', {
 
 const docId = (window.location.href.split('?')[1]).split('=')[1];
 console.log(docId);
+
+const socketServer = io('http://localhost:2200');
 
 socketServer.emit('get-document', docId);
 

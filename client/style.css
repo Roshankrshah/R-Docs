@@ -20,3 +20,48 @@
     border: none;
     box-shadow: 0 0 5px 0 rgba(0,0,0,0.5);
 }
+
+.new-doc{
+    width: 10%;
+    background-color: #fff;
+    box-shadow: 0 0 5px 0 rgba(0,0,0,0.5);
+    margin: 20px auto 20px auto;
+    min-width: 10vw;
+    min-height: 25vh;
+}
+
+.join-doc{
+    text-align: center;
+    font-size: large;
+}
+
+.docId{
+    width: 30%;
+    font-size: large;
+}
+
+#create{
+    border: none;
+    background-color: #fff;
+    font-size: 70px;
+    margin: 50px auto auto 50px;
+}
+
+#create:hover{
+    transform: scale(1.2);
+    cursor: pointer;
+}
+
+#join{
+    font-size: large;
+    padding: 5px 15px;
+    border: none;
+    background-color: blue;
+    color: #fff;
+    cursor: pointer;
+    transition: all 0.3 ease;
+}
+
+#join:hover{
+    background-color: rgb(79, 79, 249);
+}
